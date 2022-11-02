@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\AccountController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.index');
+})->name('index');
 
-Route::get('/login', function () {
-    return view('layout.login');
-});
+Route::get('/login', [LoginController::class,'showLoginForm'])
+    ->name('login');
 
-Route::post('/login', [AccountController::class,'login'])->name('login');
+Route::post('/login', [LoginController::class,'login'])
+    ->name('post.login');
+
+Route::post('/register', [AccountController::class,'register'])
+    ->name('register');
+
+Route::get('/logout', [LoginController::class,'logout'])
+    ->name('logout');
+
+Route::get('/forgot-password', [AccountController::class,'forgotPassword'])
+    ->name('forgotPassword');
+    
+Route::post('/forgot-password', [AccountController::class,'sendMailForgotPassword'])    
+    ->name('forgotPassword');
+
+Route::get('/reset-password', [AccountController::class,'resetPassword'])
+    ->name('resetPassword');
+
+Route::get('auth/google', [LoginController::class, 'googleLogin'])
+    ->name('google.login');
+
+Route::get('auth/google/callback', [LoginController::class, 'callback'])
+    ->name('google.callback');
+
+
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    include_route_files(__DIR__.'/backend/');
+});
