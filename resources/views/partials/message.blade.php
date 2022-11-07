@@ -1,6 +1,6 @@
 @if($errors->any())
 <div class="alert alert-danger" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
@@ -10,7 +10,7 @@
 </div>
 @elseif(session()->get('flash_success'))
 <div class="alert alert-success" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
@@ -22,7 +22,7 @@
 </div>
 @elseif(session()->get('flash_warning'))
 <div class="alert alert-warning" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
@@ -34,7 +34,7 @@
 </div>
 @elseif(session()->get('flash_info'))
 <div class="alert alert-info" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
@@ -46,7 +46,7 @@
 </div>
 @elseif(session()->get('flash_danger'))
 <div class="alert alert-danger" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
@@ -58,7 +58,7 @@
 </div>
 @elseif(session()->get('flash_message'))
 <div class="alert alert-info" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"> 
         <span aria-hidden="true">&times;</span>
     </button>
 

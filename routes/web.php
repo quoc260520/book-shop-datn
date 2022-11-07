@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\AccountController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,39 +15,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('frontend.index');
-})->name('index');
+    return redirect()-> route('index');
+});
 
-Route::get('/login', [LoginController::class,'showLoginForm'])
-    ->name('login');
+Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::post('/login', [LoginController::class,'login'])
-    ->name('post.login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::post('/register', [AccountController::class,'register'])
-    ->name('register');
+Route::post('/login', [LoginController::class, 'login'])->name('post.login');
 
-Route::get('/logout', [LoginController::class,'logout'])
-    ->name('logout');
+Route::post('/register', [AccountController::class, 'register'])->name('register');
 
-Route::get('/forgot-password', [AccountController::class,'forgotPassword'])
-    ->name('forgotPassword');
-    
-Route::post('/forgot-password', [AccountController::class,'sendMailForgotPassword'])    
-    ->name('forgotPassword');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/reset-password', [AccountController::class,'resetPassword'])
-    ->name('resetPassword');
+Route::get('/forgot-password', [AccountController::class, 'forgotPassword'])->name('forgotPassword');
 
-Route::get('auth/google', [LoginController::class, 'googleLogin'])
-    ->name('google.login');
+Route::post('/forgot-password', [AccountController::class, 'sendMailForgotPassword'])->name('forgotPassword');
 
-Route::get('auth/google/callback', [LoginController::class, 'callback'])
-    ->name('google.callback');
+Route::get('/reset-password', [AccountController::class, 'resetPassword'])->name('resetPassword');
 
+Route::get('auth/google', [LoginController::class, 'googleLogin'])->name('google.login');
+
+Route::get('auth/google/callback', [LoginController::class, 'callback'])->name('google.callback');
 
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    include_route_files(__DIR__.'/backend/');
+    include_route_files(__DIR__ . '/backend/');
 });

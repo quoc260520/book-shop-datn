@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 if (!function_exists('include_route_files')) {
     function include_route_files($folder)
     {
@@ -15,5 +17,18 @@ if (!function_exists('include_route_files')) {
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+}
+
+if (!function_exists('get_image_book')) {
+    function get_image_book($idImage)
+    {
+        $defaultIamge = '1FRe8Z7kmNAqdYjjGYkfvE0nmTBv5RqJ0';
+        try {
+            $url = Storage::disk('google')->url($idImage);
+        } catch (Exception $e) {
+            $url = Storage::disk('google')->url($defaultIamge);
+        }
+        return $url;
     }
 }

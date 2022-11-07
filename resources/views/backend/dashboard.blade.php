@@ -13,6 +13,7 @@
       </div>
 
       <div class="content-body">
+        @include('partials.message')
         @yield('content-body')
       </div>
 
@@ -21,4 +22,7 @@
 @endsection
 @push('after-styles')
 	 <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
+@endpush
+@push('after-scripts')
+<script src="{{ asset('js/book.js') }}"></script>
 @endpush

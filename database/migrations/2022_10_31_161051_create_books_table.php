@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('book_name',255);
             $table->integer('price')->nullable();
             $table->text('describe')->nullable();
-            $table->string('image')->nullable();
+            $table->json('image')->nullable();
             $table->tinyInteger('is_sale')->nullable();
             $table->tinyInteger('percent')->nullable();
             $table->tinyInteger('vote')->nullable();

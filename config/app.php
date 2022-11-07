@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'page_count' => env('PAGE',20),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -162,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
         /*
          * Package Service Providers...
          */
