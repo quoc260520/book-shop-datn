@@ -50,13 +50,14 @@ $(document).ready(function () {
             $(
                 listImage
             ).append(`<div class="image-wrap col-sm-2 col-6 m-sm-0 mt-2">
-            <img alt="image" class="image-book" src="${URL.createObjectURL(
-                image
-            )}">
-            <div class="icon-delete" data-icon="${time}"><i class="fa-regular fa-circle-xmark"></i>
-            </div></div>`);
+        <div class="image-body">
+        <img alt="image" class="image-book" src="${URL.createObjectURL(image)}">
+        <div class="icon-delete" data-icon="${time}"><i class="fa-regular fa-circle-xmark"></i>
+        </div>
+        <div class="image-body">
+        </div>`);
             $(".image-upload-wrap").append(
-                '<input name="images[]" class="d-none" type="file" id="image-book">'
+                '<input class="d-none" id="image-book" name="images[]" type="file">'
             );
             deleteImage();
             initImage();

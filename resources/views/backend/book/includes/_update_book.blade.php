@@ -68,10 +68,12 @@
             </div>
             <div class="images float-right d-flex flex-sm-row flex-column align-items-center m-5">
                 @foreach ($book->image ?? [] as $image)
-                <div class="image-wrap col-sm-2 col-6 m-sm-0 mt-2">
-                    <input type="hidden" name="image_update[]" value="{{ $image }}">
-                    <img alt="image" class="image-book" src="{{ get_image_book($image) }}">
-                    <div class="icon-delete"><i class="fa-regular fa-circle-xmark"></i></div>
+                <div class="image-wrap col-sm-2 col-6 mt-sm-0 mt-2">
+                    <div class="image-body">
+                        <input type="hidden" name="image_update[]" value="{{ $image }}">
+                        <img alt="image" class="image-book" src="{{ get_image_book($image) }}">
+                        <div class="icon-delete"><i class="fa-regular fa-circle-xmark"></i></div>
+                    </div>
                 </div>
                 @endforeach
             </div>
