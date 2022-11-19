@@ -40,11 +40,12 @@
         </div>
     </form>
 </div>
+
 <div class="card m-3">
-    <form action="{{ route('admin.book.post.delete') }}" method="post" id="form-delete-book">
+    <form action="{{ route('admin.book.post.delete') }}" id="form-delete-book" method="post">
         @csrf
         <div class="d-flex flex-row m-3 align-items-center justify-content-end">
-            <button class="btn btn-danger btn-xl mr-3" type="button" id="delete-book">
+            <button class="btn btn-danger btn-xl mr-3" id="delete-book" type="button">
                 <i class="fa-solid fa-trash"></i>
                 Xóa sách
             </button>
@@ -81,12 +82,16 @@
                                 <td>{{ $book->price }}</td>
                                 <td>
                                     <div class="d-flex flex-row justify-content-around">
-                                        <a href="{{ route('admin.book.get.update',[$book->id])}}"class="text-black">
+                                        <button class="text-black btn border-0" onclick="getDetailBook({{ $book->id }})"
+                                            type="button">
                                             <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('admin.book.get.update',[$book->id])}}"class="text-black">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
+                                        </button>
+                                        <button class="btn border-0" id="update-book" type="button">
+                                            <a
+                                                href="{{ route('admin.book.get.update', [$book->id]) }}"class="text-black">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        </button>
                                     </div>
 
                                 </td>

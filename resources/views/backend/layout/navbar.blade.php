@@ -33,7 +33,6 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -47,7 +46,6 @@
       <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -61,7 +59,6 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -104,7 +101,7 @@
       </li>
       <li class="nav-item d-flex align-items-center psr-2">
         <div class="image">
-          <img src="{{ asset('images/logo/account.jpg') }}" class="img-circle elevation-2" alt="User Image" with="30" height="30">
+          <img src="{{ get_avatar() }}" class="img-circle elevation-2" alt="User Image" with="30" height="30">
         </div>
         <div class="dropdown d-flex align-items-center">
           <button class="info bg-white border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

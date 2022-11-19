@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Socialite;
 use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('include_route_files')) {
@@ -23,12 +24,25 @@ if (!function_exists('include_route_files')) {
 if (!function_exists('get_image_book')) {
     function get_image_book($idImage)
     {
-        $defaultIamge = '1FRe8Z7kmNAqdYjjGYkfvE0nmTBv5RqJ0';
+        $defaultIamge = 'account.jpg';
         try {
             $url = Storage::disk('google')->url($idImage);
         } catch (Exception $e) {
             $url = Storage::disk('google')->url($defaultIamge);
         }
         return $url;
+    }
+}
+
+if (!function_exists('get_avatar')) {
+    function get_avatar()
+    {
+        $currentUser = auth()->user();
+        if($currentUser->avatar) {
+            return get_image_book($currentUser->avatar);
+        } else {
+            $userSocica = Socialite::where('user_id' ,$currentUser->id)->where('user_socialites', 1)->first();
+            return $userSocica->avatar ?? get_image_book('account.jpg');
+        }
     }
 }

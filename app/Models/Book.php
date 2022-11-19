@@ -19,6 +19,7 @@ class Book extends Model
         'publisher_id',
         'price',
         'is_sale',
+        'percent',
         'amount',
         'image',
         'status',

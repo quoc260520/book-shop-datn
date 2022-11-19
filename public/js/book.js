@@ -50,7 +50,7 @@ $(document).ready(function () {
             $(
                 listImage
             ).append(`<div class="image-wrap col-sm-2 col-6 m-sm-0 mt-2">
-        <div class="image-body">
+    <div class="image-body">
         <img alt="image" class="image-book" src="${URL.createObjectURL(image)}">
         <div class="icon-delete" data-icon="${time}"><i class="fa-regular fa-circle-xmark"></i>
         </div>
@@ -63,4 +63,26 @@ $(document).ready(function () {
             initImage();
         });
     }
+
+    $("#update-book").click(function () {
+        $(this).prop("disabled", true);
+    });
 });
+function getDetailBook(id) {
+    const url = `/admin/book/detail/${id}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: id,
+        dataType: "JSON",
+        success: function (response) {
+            $("#book-detail").html(response.data);
+            $("#book-detail").modal("show");
+        },
+        error: function (error) {},
+        complete: function () {},
+    });
+}

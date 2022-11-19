@@ -52,7 +52,7 @@
             <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-start mt-3">
                 <div class="label col-sm-3 col-6">Giảm giá</div>
                 <input class="form-control col-sm-5 col-8" maxlength="3" name="sale"
-                    placeholder="Phần trăm giảm"id="" type="text" value="{{ $book->sale ?? old('sale') }}">
+                    placeholder="Phần trăm giảm"id="" type="text" value="{{ $book->percent ?? old('sale') }}">
                 <input {{ $book->is_sale ? 'checked' : '' }} class="col-sm-1 col-1" id="vehicle1" name="is_sale"
                     type="checkbox">
             </div>

@@ -76,9 +76,9 @@ class BookController extends Controller
                 'publisher_id' => $request->publisher,
                 'price' => $request->price,
                 'is_sale' => $request->is_sale ? Book::SALE : BOOK::UN_SALE,
-                'percent' => $request->sale,
+                'percent' => intval($request->sale),
                 'amount' => $request->amount,
-                'image' => $arrImage,
+                'image' => $arrImage ?? null,
                 'status' => $request->status,
                 'describe' => $request->describe_book,
                 'year_publish' => $request->year_publish,
@@ -187,10 +187,17 @@ class BookController extends Controller
             $check = in_array($extension, $allowFileExtension);
             if ($check) {
                 Storage::cloud()->put($filename, file_get_contents($file->getRealPath()));
-                $pathImage = Storage::disk('google')->getMetadata($filename)['path'];
-                array_push($arrayIdImages, $pathImage);
+                array_push($arrayIdImages, $filename);
             }
         }
         return $arrayIdImages;
+    }
+
+    public function getBookById(Request $request, $id) {
+        $book = Book::with('author', 'category', 'publisher')->find($id);
+        $view = view('backend.book.includes._modal_detail')->withBook($book)->toHtml();
+        return response()->json([
+            'data' => $view,
+        ]); 
     }
 }

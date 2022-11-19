@@ -13,5 +13,6 @@ Route::group(
         Route::get('/update/{id}', [BookController::class, 'getUpdate'])->name('book.get.update');
         Route::post('/update/{id}', [BookController::class, 'update'])->name('book.post.update');
         Route::post('/delete', [BookController::class, 'delete'])->name('book.post.delete');
+        Route::get('/detail/{id}', [BookController::class, 'getBookById'])->name('book.get.detail');
     },
 );

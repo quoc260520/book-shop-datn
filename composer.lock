@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f2b602100f4f7df26ebb64295131b61",
+    "content-hash": "cce8567ae058510fc1a7e4844d4c3c14",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2271,6 +2271,65 @@
                 "source": "https://github.com/thephpleague/oauth1-client/tree/v1.10.1"
             },
             "time": "2022-04-15T14:02:14+00:00"
+        },
+        {
+            "name": "masbug/flysystem-google-drive-ext",
+            "version": "v1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/masbug/flysystem-google-drive-ext.git",
+                "reference": "c42a6ed1996b062587ace32eab9e90c7a11cf25d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/masbug/flysystem-google-drive-ext/zipball/c42a6ed1996b062587ace32eab9e90c7a11cf25d",
+                "reference": "c42a6ed1996b062587ace32eab9e90c7a11cf25d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "google/apiclient": "^2.2",
+                "guzzlehttp/guzzle": "^6.3 | ^7.0",
+                "guzzlehttp/psr7": "^1.7|^2.0",
+                "league/flysystem": "^1.0",
+                "php": "^7.2 | ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 | ^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Masbug\\Flysystem\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Naoki Sawada",
+                    "email": "hypweb@gmail.com"
+                },
+                {
+                    "name": "Mitja Spes",
+                    "email": "mitja@lxnav.com"
+                }
+            ],
+            "description": "Flysystem adapter for Google Drive with seamless virtual<=>display path translation",
+            "keywords": [
+                "Flysystem",
+                "extended",
+                "google-drive",
+                "laravel",
+                "translated"
+            ],
+            "support": {
+                "issues": "https://github.com/masbug/flysystem-google-drive-ext/issues",
+                "source": "https://github.com/masbug/flysystem-google-drive-ext/tree/v1.3.2"
+            },
+            "time": "2022-06-24T06:43:30+00:00"
         },
         {
             "name": "monolog/monolog",

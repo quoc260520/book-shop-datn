@@ -8,7 +8,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu">
                 <li class="nav-item has-treeview menu-open">
-                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
+                        href="{{ route('admin.dashboard') }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -17,7 +18,7 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ Route::is('admin.dashboard.*') ? 'active' : '' }}" href="#">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
                             Quản lý tài khoản
@@ -35,7 +36,7 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ Route::is('admin.book.*') ? 'active' : '' }}" href="#">
                         <i class="nav-icon fa-solid fa-book"></i>
                         <p>
                             Quản lý sách
@@ -44,7 +45,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.book.list') }}">
-                                <p>List</p>
+                                <p>Danh sách</p>
                             </a>
                         </li>
                     </ul>
@@ -58,16 +59,16 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.book.list') }}">
-                                <p>List</p>
+                        <li class="nav-item {{ Route::is('admin.slider.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.slider.list') }}">
+                                <p>Danh sách</p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ Route::is('admin.author.*') ? 'active' : '' }}" href="#">
                         <i class="nav-icon fa-solid fa-user-pen"></i>
                         <p>
                             Quản lý tác giả
@@ -75,15 +76,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <p>Level 2</p>
+                            <a class="nav-link" href="{{ route('admin.author.list') }}">
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.author.create') }}">
+                                <p>Thêm tác giả </p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ Route::is('admin.publisher.*') ? 'active' : '' }}" href="#">
                         <i class="nav-icon fa-solid fa-shop"></i>
                         <p>
                             Quản lý nhà xuất bản
@@ -91,8 +97,29 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <p>Level 2</p>
+                            <a class="nav-link" href="{{ route('admin.publisher.list') }}">
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.publisher.create') }}">
+                                <p>Thêm nhà xuất bản</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link {{ Route::is('admin.category.*') ? 'active' : '' }}" href="#">
+                        <i class="nav-icon fa-solid fa-list"></i>
+                        <p>
+                            Quản lý danh mục
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.category.list') }}">
+                                <p>Danh sách</p>
                             </a>
                         </li>
                     </ul>
@@ -107,28 +134,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <p>Level 2</p>
+                            <a class="nav-link" href="{{ route('admin.publisher.list') }}">
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.publisher.create') }}">
+                                <p>Thêm nhà xuất bản</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
-                <li class="nav-item has-treeview">
-                  <a class="nav-link" href="#">
-                      <i class="nav-icon fa-solid fa-list"></i> 
-                      <p>
-                          Quản lý danh mục
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">
-                              <p>Level 2</p>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
             </ul>
         </nav>
     </div>
