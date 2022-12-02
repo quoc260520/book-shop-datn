@@ -18,21 +18,14 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link {{ Route::is('admin.dashboard.*') ? 'active' : '' }}" href="#">
+                    <a class="nav-link {{ Route::is('admin.dashboard.*') ? 'active' : '' }}"
+                        href="{{ route('admin.account.list') }}">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
                             Quản lý tài khoản
                             <span class="badge badge-info right">6</span>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/layout/collapsed-sidebar.html">
-                                <p>Collapsed Sidebar</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item has-treeview">
@@ -119,6 +112,22 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.category.list') }}">
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link {{ Route::is('admin.voucher.*') ? 'active' : '' }}" href="#">
+                        <i class="nav-icon fa-solid fa-percent"></i>
+                        <p>
+                            Quản lý mã giảm giá 
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.voucher.list') }}">
                                 <p>Danh sách</p>
                             </a>
                         </li>

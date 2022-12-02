@@ -13,5 +13,10 @@ class Cart extends Model
         'user_id',
     ];
 
+    public function CartDetails()
+    {
+        return $this->hasMany('App\Models\CartDetail');
+    }
+
     
 }

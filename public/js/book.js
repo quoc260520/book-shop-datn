@@ -37,7 +37,6 @@ $(document).ready(function () {
     initImage();
     function initImage() {
         $("#image-book").change(function (event) {
-            console.log($(".image-wrap").length);
             if ($(".image-wrap").length == 5) {
                 return;
             }

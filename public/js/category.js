@@ -63,3 +63,47 @@ $("#delete-publisher").click(function () {
         }
     });
 });
+
+$("#delete-account").click(function () {
+    $(this).prop("disabled", true);
+    Swal.fire({
+        title: "Cảnh báo!",
+        text: "Bạn đã chắc chắn muốn xóa?",
+        icon: "warning",
+        showCancelButton: true,
+        revertButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#form-delete-account").submit();
+        } else {
+            $(this).prop("disabled", false);
+        }
+    });
+});
+
+$(".time").daterangepicker({
+    timePicker: true,
+    minDate: moment(),
+    startDate: moment().startOf("hour"),
+    locale: {
+        format: "Y-M-D hh:mm:ss",
+    },
+    singleDatePicker: true,
+});
+
+$("#delete-voucher").click(function () {
+    $(this).prop("disabled", true);
+    Swal.fire({
+        title: "Cảnh báo!",
+        text: "Bạn đã chắc chắn muốn xóa?",
+        icon: "warning",
+        showCancelButton: true,
+        revertButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#form-delete-voucher").submit();
+        } else {
+            $(this).prop("disabled", false);
+        }
+    });
+});

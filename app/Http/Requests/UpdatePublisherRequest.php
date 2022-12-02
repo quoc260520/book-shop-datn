@@ -16,8 +16,11 @@ class UpdatePublisherRequest extends CreatePublisherRequest
     {
         return [
             'publisher_id' => ['required', 'integer'],
+            'publisher_name' => ['bail', 'required', 'string', 'min:3'],
             'email' => ['bail', 'required', 'email', 'unique:publishers,email,' . $this->publisher_id ],
             'phone' => ['bail', 'required', new Phone(),'min:10','max:12', 'unique:publishers,phone,' . $this->publisher_id],
+            'address' => ['bail', 'nullable', 'string'],
+            'info' => ['bail','nullable','string'],
         ];
     }
 }

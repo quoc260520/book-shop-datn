@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\AccountController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -21,13 +22,21 @@ Route::get('/', function () {
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
+Route::get('/search', [IndexController::class, 'search'])->name('search');
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('add-cart');
+Route::get('/update-cart', [CartController::class, 'updateCart'])->name('update-cart');
+
 
 Route::post('/login', [LoginController::class, 'login'])->name('post.login');
 
 Route::post('/register', [AccountController::class, 'register'])->name('register');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::get('/forgot-password', [AccountController::class, 'forgotPassword'])->name('forgotPassword');
 
@@ -39,6 +48,13 @@ Route::get('auth/google', [LoginController::class, 'googleLogin'])->name('google
 
 Route::get('auth/google/callback', [LoginController::class, 'callback'])->name('google.callback');
 
+Route::get('/drive/callback', [LoginController::class, 'driveCallback'])->name('drive.callback');
+
+
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     include_route_files(__DIR__ . '/backend/');
+});
+
+Route::group(['namespace' => 'Frontend'], function () {
+    include_route_files(__DIR__ . '/frontend/');
 });

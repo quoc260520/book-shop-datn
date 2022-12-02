@@ -43,6 +43,10 @@ class Book extends Model
     {
         return $this->belongsTo('App\Models\Publisher');
     }
+    public function orderDetails()
+    {
+        return $this->hasMany('App\Models\OrderDetail');
+    }
 
 
 

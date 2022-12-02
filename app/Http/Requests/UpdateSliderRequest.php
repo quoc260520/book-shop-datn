@@ -9,6 +9,7 @@ class UpdateSliderRequest extends CreateSlider
     public function rules()
     {
         return [
+            'link' => 'bail|required|string',
             'image' => ['bail', 'nullable', 'mimes:jpeg,jpg,png|max:10000']
         ];
     }

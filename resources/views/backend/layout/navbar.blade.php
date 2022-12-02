@@ -108,9 +108,9 @@
             {{ auth()->user()->first_name.' '.auth()->user()->last_name ?? 'user'}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+            <li><a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a></li>
+            <li><a class="dropdown-item" href="{{ route('index') }}">Trang chủ</a></li>
           </ul>
         </div>
       </li>

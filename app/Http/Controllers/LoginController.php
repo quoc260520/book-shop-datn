@@ -140,5 +140,7 @@ class LoginController extends Controller
         auth()->login($user, true);
         return $this->sendLoginResponse($request);
     }
+    public function driveCallback(Request $request) {
+    }
     
 }

@@ -7,32 +7,30 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <meta content="{{ csrf_token() }}" name="csrf-token">
     <link href="{{ asset('images/logo/icon.svg') }}" rel="shortcut icon" type="image/jpg" />
+    <link href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" rel="stylesheet" type="text/css" />
+    <link href="http://kenwheeler.github.io/slick/slick/slick-theme.css" rel="stylesheet" type="text/css" />
     @stack('before-styles')
-    {{-- Slick js --}}
-    <link href="slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="slick/slick-theme.css" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/frontend.css') }}" rel="stylesheet" type="text/css">
-
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     @stack('after-styles')
-
 </head>
 
 <body>
     <div class="">
-        @include('partials.message')
-        @yield('content')
+        <div class="app app__container">
+            @include('frontend.layout.topbar')
+            @yield('content')
+        </div>
     </div>
     @stack('before-scripts')
     <script src="{{ asset(mix('js/app.js')) }}"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="slick/slick.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/frontend.js') }}"></script>
     @stack('after-scripts')
     @yield('script')
-
-
 </body>
+
 </html>
