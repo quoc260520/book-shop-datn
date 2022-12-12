@@ -22,12 +22,16 @@ $(document).ready(function () {
                 location.reload();
             },
             error: function (error) {
+                let message =
+                    error.responseJSON.message == "over"
+                        ? "Số lượng sách không đủ!"
+                        : "Đã có lỗi xảy ra!";
                 $("#message")
                     .html(`<div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    Đã có lỗi xảy ra!
+                     ${message}
                 </div>`);
             },
             complete: function () {
@@ -51,24 +55,36 @@ $(document).ready(function () {
             }
         }
         $("#counter").val(newVal);
+        let id = $("input[name=book_id]").val();
+        let vm = this;
         $.ajax({
-            url: url,
+            url: `/book/check-amount/${id}`,
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            data: data,
+            data: {
+                amount: $("#counter").val(),
+            },
             dataType: "JSON",
             success: function (response) {
-                location.reload();
+                $(".btn-add-to-cart, .btn-shopping-now").prop(
+                    "disabled",
+                    false
+                );
             },
             error: function (error) {
+                $(".btn-add-to-cart, .btn-shopping-now").prop("disabled", true);
+                let message =
+                    error.responseJSON.message == "over"
+                        ? "Số lượng sách không đủ!"
+                        : "Đã có lỗi xảy ra!";
                 $("#message")
                     .html(`<div class="alert alert-danger" role="alert">
                     <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    Đã có lỗi xảy ra!
+                    ${message}
                 </div>`);
             },
             complete: function () {

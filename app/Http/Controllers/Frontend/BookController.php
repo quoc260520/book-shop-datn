@@ -20,4 +20,16 @@ class BookController extends Controller
         }
         return view('frontend.book.detail')->withBook($book)->withVouchers($vouchers);
     }
+
+    public function checkAmount(Request $request,$id) {
+        $book = Book::findOrFail($id);
+        if($book->amount && intval($book->amount) < intval($request->amount)) {
+            return response()->json([
+                'message' => 'over',
+            ],400); 
+        }
+        return response()->json([
+            'message' => 'oke',
+        ]); 
+    }
 }

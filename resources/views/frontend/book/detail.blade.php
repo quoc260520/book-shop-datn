@@ -6,6 +6,7 @@
 
         </div>
         <div class="content-book cart bg-white rounded">
+            <input type="hidden" name="book_id" value="{{ $book->id }}">
             <div class="content-info">
                 <div class="content-info col-12 d-flex flex-sm-row flex-column">
                     <div class="img-wrapper col-6 d-flex align-items-center justify-content-around">
@@ -171,22 +172,18 @@
             <div class="d-flex flex-row align-items-start suggest-books row">
                 <div class="suggest-book col-3 d-flex flex-column">
                     <div class="img-suggest d-flex flex-row justify-content-center">
-                        <div class="">
-                            <a href="{{ route('book.detail', $book->id) }}">
-                                <img alt="" class="ml-5 col-8" class="img-book"
-                                    src="{{ get_image_book($book->image[0]) }}">
-                            </a>
+                        <div class="bg-secondary">
+                            <img alt="" class="img-book" class="ml-5 col-8"
+                                src="{{ get_image_book($book->image[0]) }}">
                         </div>
 
                         @if ($book->is_sale)
                             <div class="percent-suggest ms-3">{{ $book->percent }} %</div>
                         @endif
                     </div>
-                    <a class="name-link" href="{{ route('book.detail', $book->id) }}">
-                        <div class="name-suggest">
-                            {{ $book->book_name }}
-                        </div>
-                    </a>
+                    <div class="name-suggest">
+                        {{ $book->book_name }}
+                    </div>
                     <div class="price-suggest">
                         {{ number_format($book->price) }} đ
                     </div>

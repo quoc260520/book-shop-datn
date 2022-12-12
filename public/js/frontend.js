@@ -1,3 +1,20 @@
+$(document).on({
+    ajaxStart: function () {
+        $("body").addClass("loading");
+    },
+    ajaxStop: function () {
+        $("body").removeClass("loading");
+    },
+});
+
+$(window).on("beforeunload", function () {
+    $("body").addClass("loading");
+});
+
+$(function () {
+    $("body").removeClass("loading");
+});
+
 loadImage();
 function loadImage() {
     $("#avatar-input").change(function (e) {

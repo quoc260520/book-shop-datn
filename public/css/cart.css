@@ -140,3 +140,64 @@ font-size: 22px;
 .label-trash:hover {
 cursor: pointer;
 }
+.voucher-wrap .label-voucher {
+font-size:16px;
+font-weight: 600;
+}
+.input-voucher {
+font-size: 14px;
+height: 40px;
+}
+.btn-apply-voucher,
+.btn-apply-payment,
+.btn-submit-payment {
+margin-left: 0;
+color: #FFFFFF;
+background: #1BA9FF;
+border: 2px solid #1BA9FF;
+height: 40px;
+font-size:14px;
+cursor: pointer;
+user-select: none;
+width: 220px;
+font-weight: 700;
+border-radius: 8px;
+padding: 0 10px;
+text-decoration: none;
+text-transform: uppercase;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+.btn-apply-voucher:disabled,
+.btn-apply-payment:disabled {
+    background:#ccc;
+    border:#ccc;
+}
+
+.label-money {
+    font-size: 16px;
+    font-weight:400;
+}
+
+.label-payment {
+    font-size:15px;
+    font-weight:400;
+    font-style:normal;
+}
+
+.input-info {
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+.return-cart {
+    font-size: 15px;
+    font-weight:400;
+}
+
+
+
+

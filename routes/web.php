@@ -27,8 +27,12 @@ Route::get('/search', [IndexController::class, 'search'])->name('search');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('add-cart');
-Route::get('/update-cart', [CartController::class, 'updateCart'])->name('update-cart');
-
+Route::post('/update-cart/{id}', [CartController::class, 'updateCart'])->name('update-cart');
+Route::delete('/delete-cart/{id}', [CartController::class, 'deleteCart'])->name('delete-cart');
+Route::post ('/check-payment', [CartController::class, 'checkPayment'])->name('check-payment');
+Route::post ('/apply-voucher', [CartController::class, 'applyVoucher'])->name('apply-voucher');
+Route::post ('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post ('/apply-payment', [CartController::class, 'applyPayment'])->name('apply-payment');
 
 Route::post('/login', [LoginController::class, 'login'])->name('post.login');
 

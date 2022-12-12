@@ -18,7 +18,7 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link {{ Route::is('admin.dashboard.*') ? 'active' : '' }}"
+                    <a class="nav-link {{ Route::is('admin.account.*') ? 'active' : '' }}"
                         href="{{ route('admin.account.list') }}">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
@@ -45,19 +45,13 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" {{ Route::is('admin.slider.list') ? 'active' : '' }}
+                    href="{{ route('admin.slider.list') }}">
                         <i class="nav-icon fa-solid fa-sliders"></i>
                         <p>
                             Quản lý slide
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item {{ Route::is('admin.slider.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.slider.list') }}">
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item has-treeview">

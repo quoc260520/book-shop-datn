@@ -5,21 +5,21 @@
             @csrf
             <div class="col-8 d-flex flex-column pe-5">
                 <input name="id" type="hidden" value="{{ auth()->user()->id }}">
-                <div class="mb-4 row">
-                    <label class="col-sm-2 col-form-label">Mật khẩu hiện tại</label>
-                    <div class="col-sm-10">
+                <div class="mb-5 mt-5 row">
+                    <label class="col-sm-4 col-form-label">Mật khẩu hiện tại</label>
+                    <div class="col-sm-8">
                         <input class="input-info" name="old_password" type="password" value="">
                     </div>
                 </div>
-                <div class="mb-4 row">
-                    <label class="col-sm-2 col-form-label" for="staticEmail">Mật khẩu mới</label>
-                    <div class="col-sm-10">
+                <div class="mb-5 row">
+                    <label class="col-sm-4 col-form-label" for="staticEmail">Mật khẩu mới</label>
+                    <div class="col-sm-8">
                         <input class="input-info" name="new_password" type="password" value="">
                     </div>
                 </div>
-                <div class="mb-4 row">
-                    <label class="col-sm-2 col-form-label">Xác nhận mật khẩu</label>
-                    <div class="col-sm-10">
+                <div class="mb-5 row">
+                    <label class="col-sm-4 col-form-label">Xác nhận mật khẩu</label>
+                    <div class="col-sm-8">
                         <input class="input-info" name="new_password_confirmation" type="password" value="">
                     </div>
                 </div>

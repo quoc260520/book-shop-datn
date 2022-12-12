@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->tinyInteger('status');
-            $table->tinyInteger('total_money');
+            $table->integer('total_money');
             $table->timestamps();
             $table->softDeletes();
         });

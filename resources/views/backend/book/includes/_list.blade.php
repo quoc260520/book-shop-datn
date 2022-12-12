@@ -62,8 +62,8 @@
                         <th class="w-20 no-wrap-keep" scope="col">Tên sách</th>
                         <th class="w-20 no-wrap-keep" scope="col">Nhà xuất bản</th>
                         <th class="w-10 no-wrap-keep" scope="col">Năm xuất bản</th>
-                        <th class="w-15 no-wrap-keep" scope="col">Giá bán</th>
                         <th class="w-15 no-wrap-keep" scope="col">Tác giả</th>
+                        <th class="w-15 no-wrap-keep" scope="col">Giá bán (VND)</th>
                         <th class="w-15 no-wrap-keep" scope="col">Chi tiết</th>
                     </tr>
                 </thead>
@@ -79,7 +79,7 @@
                                 <td>{{ $book->publisher->publisher_name }}</td>
                                 <td>{{ $book->year_publish }}</td>
                                 <td>{{ $book->author->name }}</td>
-                                <td>{{ $book->price }}</td>
+                                <td>{{ number_format($book->price)}} đ</td>
                                 <td>
                                     <div class="d-flex flex-row justify-content-around">
                                         <button class="text-black btn border-0" onclick="getDetailBook({{ $book->id }})"

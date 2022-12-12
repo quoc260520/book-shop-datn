@@ -46,10 +46,10 @@
                                             </h4>
                                         </a>
                                         <div class="home-product-item__price">
-                                            <span class="home-product-item__price-current">{{ $book->price }}</span>
+                                            <span class="home-product-item__price-current"> {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}</span>
                                             @if ($book->is_sale)
                                                 <div class="home-product-item__price-old">
-                                                    {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}
+                                                    {{ number_format($book->price) }}
                                                 </div>
                                             @endif
                                         </div>

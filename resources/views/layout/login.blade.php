@@ -49,7 +49,7 @@
                     <div class="overlay-panel overlay-left">
                         <h1 class="m-0 fw-bold">Xin chào!</h1>
                         <p class="descriptive">Vui lòng đăng nhập bằng tài khoản của bạn</p>
-                        <button class="button-login ghost" id="signIn">Đăng ký</button>
+                        <button class="button-login ghost" id="signIn">Đăng nhập</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1 class="m-0 fw-bold">Xin chào!</h1>

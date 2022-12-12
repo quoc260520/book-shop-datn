@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
+        FruitCake\Cors\CorsServiceProvider::class,
         /*
          * Package Service Providers...
          */
