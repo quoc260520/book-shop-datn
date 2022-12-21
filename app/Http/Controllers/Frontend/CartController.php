@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplyPaymentRequest;
+use App\Jobs\SendMailOrderJob;
 use App\Models\Book;
 use App\Models\Cart as ModelsCart;
 use App\Models\CartDetail;
@@ -112,7 +113,7 @@ class CartController extends Controller
                 'cart_id' => $cart,
                 'book_id' => $book->id,
             ])->first();
-            if (intval($amount) + intval($cartDetail->amount) > $book->amount) {
+            if (intval($amount) + intval($cartDetail->amount ?? 0) > $book->amount) {
                 throw new HttpResponseException(response()->json(['message' => 'over', 'reload' => true], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
             }
             if ($cartDetail) {
@@ -346,6 +347,7 @@ class CartController extends Controller
     public function applyPayment(ApplyPaymentRequest $request)
     {
         $ids = $request->id;
+        $voucher = null;
         if (!count($ids)) {
             return back();
         }
@@ -359,6 +361,7 @@ class CartController extends Controller
             DB::beginTransaction();
             $order = Order::create([
                 'user_id' => auth()->user() ? auth()->user()->id : null,
+                'full_name' => $request->full_name,
                 'voucher_id' => $voucher->id ?? null,
                 'address' => $request->address . ',' . $request->province . ',' . $request->district . ',' . $request->ward,
                 'phone' => $request->phone,
@@ -376,15 +379,20 @@ class CartController extends Controller
                 }
             }
             DB::commit();
-            foreach($ids as $id) {
-                $this->deleteCart($request,$id);
+            foreach ($ids as $id) {
+                $this->deleteCart($request, $id);
             }
-            return 'Thành công';
+            SendMailOrderJob::dispatch($cartUser, $voucher, $request->all());
+            return redirect(route('payment-success'));
         } catch (\Exception $e) {
             Log::channel('daily')->error('Order fail:' . $e->getMessage());
             DB::rollBack();
-            return 'Thất bại';
+            return redirect('cart');
         }
+    }
 
+    public function paymentSuccess()
+    {
+        return view('frontend.order_success');
     }
 }

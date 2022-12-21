@@ -200,4 +200,13 @@ class BookController extends Controller
             'data' => $view,
         ]); 
     }
+
+    public function exportBook() {
+        $book= Book::with('author', 'category:category_name', 'publisher')->get();
+        return (new InvoicesExport)->download('books.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+      ]);
+        return $book->toArray(); 
+
+    }
 }

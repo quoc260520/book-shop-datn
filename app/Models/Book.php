@@ -48,7 +48,9 @@ class Book extends Model
         return $this->hasMany('App\Models\OrderDetail');
     }
 
-
-
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
 
 }

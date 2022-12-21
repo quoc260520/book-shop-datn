@@ -66,7 +66,7 @@
                                 </li>
                             @endif
                             <li class="header__navbar-user-item">
-                                <a href="">Đơn mua</a>
+                                <a href="{{ route('order.list') }}">Đơn mua</a>
                             </li>
                             <li class="header__navbar-user-item header__navbar-user-item--separate">
                                 <a href="{{ route('logout') }}">Đăng xuất</a>

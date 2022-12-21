@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Auth\AccountController;
+use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\LoginController;
@@ -22,6 +23,9 @@ Route::get('/', function () {
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
+Route::get('/index-load-more', [IndexController::class, 'indexLoadMore'])->name('index-load-more');
+
+
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -33,6 +37,8 @@ Route::post ('/check-payment', [CartController::class, 'checkPayment'])->name('c
 Route::post ('/apply-voucher', [CartController::class, 'applyVoucher'])->name('apply-voucher');
 Route::post ('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post ('/apply-payment', [CartController::class, 'applyPayment'])->name('apply-payment');
+Route::get ('/payment-success', [CartController::class, 'paymentSuccess'])->name('payment-success');
+
 
 Route::post('/login', [LoginController::class, 'login'])->name('post.login');
 
@@ -41,6 +47,9 @@ Route::post('/register', [AccountController::class, 'register'])->name('register
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
+Route::get('/all-category', [IndexController::class, 'getAllCategory'])->name('all-category');
+
 
 Route::get('/forgot-password', [AccountController::class, 'forgotPassword'])->name('forgotPassword');
 
@@ -62,3 +71,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::group(['namespace' => 'Frontend'], function () {
     include_route_files(__DIR__ . '/frontend/');
 });
+
+
+Route::get('export', [BookController::class, 'exportBook']);

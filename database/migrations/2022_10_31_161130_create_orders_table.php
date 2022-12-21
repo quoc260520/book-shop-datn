@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('voucher_id')->nullable();
+            $table->string('full_name');
             $table->string('address');
             $table->string('phone');
             $table->string('email');

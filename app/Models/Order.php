@@ -14,10 +14,15 @@ class Order extends Model
     const STATUS_ERROR = 3;
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'voucher_id', 'address', 'phone', 'email', 'status', 'total_money'];
+    protected $fillable = ['user_id', 'voucher_id', 'full_name', 'address', 'phone', 'email', 'status', 'total_money'];
     
     public function orderDetails()
     {
         return $this->hasMany('App\Models\OrderDetail');
+    }
+
+    public function voucher()
+    {
+        return $this->belongsTo('App\Models\Voucher');
     }
 }

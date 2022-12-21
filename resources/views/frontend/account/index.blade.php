@@ -9,11 +9,14 @@
                 <nav class="category">
                     <h3 class="category__heading">Tài khoàn của tôi</h3>
                     <ul class="category-list">
-                        <li class="category-item category-item--active">
+                        <li class="category-item {{ Route::is('account.info',auth()->user()->id) ? 'category-item--active' : '' }}">
                             <a class="catrgory-item__link" href="{{ route('account.info',auth()->user()->id) }}">Thông tin</a>
                         </li>
-                        <li class="category-item ">
+                        <li class="category-item {{ Route::is('account.change-password',auth()->user()->id) ? 'category-item--active' : '' }}">
                             <a class="catrgory-item__link" href="{{ route('account.change-password',auth()->user()->id) }}">Đổi mật khẩu</a>
+                        </li>
+                        <li class="category-item {{ Route::is('order.list') ? 'category-item--active' : '' }}">
+                            <a class="catrgory-item__link" href="{{ route('order.list') }}">Đơn hàng</a>
                         </li>
                     </ul>
                 </nav>
@@ -21,6 +24,7 @@
             <div class="grid__column-10 pe-0">
                 @yield('info')
                 @yield('change-password')
+                @yield('order')
             </div>
         </div>
     </div>

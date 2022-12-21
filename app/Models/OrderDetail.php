@@ -16,4 +16,8 @@ class OrderDetail extends Model
     {
         return $this->belongsTo('App\Models\Order');
     }
+    public function book()
+    {
+        return $this->belongsTo('App\Models\Book');
+    }
 }

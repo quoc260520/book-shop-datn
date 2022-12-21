@@ -2,6 +2,7 @@
 @section('content')
     <div class="grid">
         <div class="pt-3">{!! Breadcrumbs::render() !!}</div>
+        @include('partials.message')
         <div id="message">
 
         </div>
@@ -218,12 +219,13 @@
                 </div>
             </div>
         </div>
+
+        @include('frontend.book.includes.review')
     </div>
 
 
     </div>
     @include('frontend.layout.footer')
-    @include('frontend.book.includes._modal_detail')
 @endsection
 @push('after-styles')
     <link href="{{ asset('css/book-detail.css') }}" rel="stylesheet" type="text/css">

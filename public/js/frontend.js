@@ -10,8 +10,7 @@ $(document).on({
 $(window).on("beforeunload", function () {
     $("body").addClass("loading");
 });
-
-$(function () {
+$(window).on("unload", function () {
     $("body").removeClass("loading");
 });
 
@@ -73,3 +72,66 @@ $(".header__search-input").blur(function () {
         }
     });
 });
+
+let sliderLinks = document.querySelectorAll(".category-item");
+let contentPopup = document.querySelector(".category-child");
+if (sliderLinks && contentPopup) {
+    for (let sliderItem of sliderLinks) {
+        sliderItem.onmouseover = function () {
+            contentPopup.classList.add("d-flex");
+            contentPopup.classList.remove("d-none");
+            let categoryName = this.querySelector(
+                "a.catrgory-item__link"
+            ).getAttribute("value");
+            createClass(categoryName, data);
+        };
+        sliderItem.onmouseout = function () {
+            contentPopup.classList.remove("d-flex");
+            contentPopup.classList.add("d-none");
+        };
+        contentPopup.onmouseover = function () {
+            this.classList.add("d-flex");
+            this.classList.remove("d-none");
+        };
+        contentPopup.onmouseout = function () {
+            this.classList.remove("d-flex");
+            this.classList.add("d-none");
+        };
+    }
+}
+
+const data = JSON.parse(localStorage.getItem("Category"));
+
+async function createClass(categoryParent, data) {
+    let category = data.filter((value) => {
+        return value.parent_id == categoryParent;
+    });
+    let categoryDetailList = document.querySelector(".category-child");
+    let htmls = category?.map((value) => {
+        let childList = "";
+        childList = childList + renderCategoryListChild(data, value);
+        return `<div class="category_first-child col">
+    <a class="catrgory-item__link" href="/search?category_id=${value.id}" value="${value.id}">${value.category_name}</a>
+    <ul class="list-category-child p-0">
+        ${childList}
+    </ul>
+</div>`;
+    });
+    var html = htmls?.join("");
+    categoryDetailList.innerHTML = html;
+}
+
+function renderCategoryListChild(data, categoryParent) {
+    return data
+        .filter((item) => {
+            return item.parent_id == categoryParent.id;
+        })
+        ?.map((child) => {
+            return (
+                `<li class="list-category-child-item">
+    <a class="catrgory-item__link fs-4" href="/search?category_id=${child.id}"
+        value="${child.id}">${child.category_name}</a>
+</li>` + renderCategoryListChild(data, child)
+            );
+        });
+}

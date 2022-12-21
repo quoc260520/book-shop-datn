@@ -88,6 +88,13 @@ Breadcrumbs::for('admin.voucher.update', function ($trail,$voucher) {
     $trail->push('Cập nhật mã giảm giá', route('admin.voucher.update',$voucher));
 });
 
+//Order
+
+Breadcrumbs::for('admin.order.list', function ($trail) {
+    $trail->push('Quản lý đơn hàng', route('admin.order.list'));
+});
+
+
 
 // Frontend
 Breadcrumbs::for('index', function ($trail) {

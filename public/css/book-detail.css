@@ -350,3 +350,37 @@ padding: 0;
 color: #c4bdbd;
 }
 
+.point-rating {
+    font-size: 40px;
+    font-weight: bold;
+}
+.point {
+    font-size: 25px;
+    font-weight: bold;
+    transform: translateY(25%)
+}
+.star {
+    color: #cccccc;
+    font-size: 14px;
+}
+.total-rating {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.progress {
+    width: 300px;
+    height: 10px;
+}
+.comment-user:not(:first-child) {
+    border-top: 1px solid #ccc;
+}
+.star-ratting {
+    color: #FAB005;
+}
+.star-ratting-color {
+    color: #FAB005;
+}
+.stars {
+    color: #FAB005;
+    font-size: 1.2em;
+}

@@ -129,24 +129,12 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ Route::is('admin.order.*') ? 'active' : '' }}" href="{{ route('admin.order.list') }}">
                         <i class="nav-icon fa-solid fa-truck-fast"></i>
                         <p>
                             Quản lý đơn hàng
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.publisher.list') }}">
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.publisher.create') }}">
-                                <p>Thêm nhà xuất bản</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>

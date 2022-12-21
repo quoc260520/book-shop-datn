@@ -7,7 +7,7 @@ $(document).ready(function () {
         $(this).prop("disabled", true);
         vm = this;
         let url = $(this).data("href");
-        data = {
+        let data = {
             amount: $("#counter").val(),
         };
         $.ajax({
@@ -98,5 +98,40 @@ $(document).ready(function () {
                 ? 999
                 : parseFloat($("#counter").val());
         $("#counter").val(newVal);
+    });
+});
+
+$(".star-ratting").click(function () {
+    let id = $(this).attr("id").slice(5, 6);
+    console.log(id);
+    $(".star-ratting").removeClass("star-ratting");
+    for (let i = 1; i <= id; i++) {
+        $("#star-" + i).addClass("star-ratting");
+    }
+});
+
+$("#btn-comment").click(function () {
+    $(this).prop("disabled", true);
+    let vm = this;
+    let id = $("input[name=book_id]").val();
+    let star = $(".star-ratting").length;
+    let content = $("#content").val();
+    $.ajax({
+        url: `/book/comment/${id}`,
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            star: star,
+            content: content,
+        },
+        dataType: "JSON",
+        success: function (response) {},
+        error: function (error) {},
+        complete: function () {
+            location.reload();
+            $(vm).prop("disabled", false);
+        },
     });
 });

@@ -21,20 +21,20 @@ font-family: 'Roboto', sans-serif;
 box-sizing: border-box;
 }
 .overlay{
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    background: rgba(255,255,255,0.8) url('/images/app/load.gif') center no-repeat;
+display: none;
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+z-index: 999;
+background: rgba(255,255,255,0.8) url('/images/app/load.gif') center no-repeat;
 }
 body.loading{
-    overflow: hidden;   
+overflow: hidden;
 }
 body.loading .overlay{
-    display: block;
+display: block;
 }
 /* Responsive */
 .grid {
@@ -993,7 +993,7 @@ padding-top:36px;
 .category{
 background-color:var(--white-color);
 border-radius: 2px;
-
+height: 560px;
 }
 
 .category__heading{
@@ -1042,7 +1042,7 @@ position: relative;
 right: 0;
 text-decoration: none;
 color:var(--text-color);
-font-size: 1.4rem;
+font-size: 1.6rem;
 padding:8px 20px;
 display:block;
 transition:right linear 0.1s;
@@ -1051,6 +1051,7 @@ transition:right linear 0.1s;
 right: -4px;
 color: var(--primary-color)
 }
+
 
 /* Home sort+filter */
 .home-filter {
@@ -1419,14 +1420,60 @@ margin-bottom: 200px;
 box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%);
 -webkit-box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%);
 }
-.select-search { 
-    min-width: 200px;
-    height: 34px;
-    border-radius: 2px;
-    padding: 0 12px;
-    background-color: var(--white-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
+.select-search {
+min-width: 200px;
+height: 34px;
+border-radius: 2px;
+padding: 0 12px;
+background-color: var(--white-color);
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 14px;
+}
+.category-child {
+z-index: 9998;
+position: absolute;
+background: #FFFFFF;
+height: 560px;
+width: 1005px;
+display: none;
+animation:leftToRight ease .5s ;
+}
+.category-child::after{
+content: "";
+width: 40px;
+height: 560px;
+position: absolute;
+display: block;
+top: 0;
+left:-20px;
+}
+
+@keyframes leftToRight {
+0% {
+opacity: 0;
+width: 0;
+}
+100% {
+opacity: 1;
+width: 1;
+}
+}
+
+.category_first-child {
+font-size: 16px;
+font-weight: bold;
+}
+.list-category-child {
+list-style: none;
+font-weight: normal;
+}
+.list-category-child-item {
+    padding: 5px 0;
+}
+.list-category-child-link {
+text-decoration: none;
+color:#333;
+font-size: 14px;
 }

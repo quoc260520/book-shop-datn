@@ -107,3 +107,116 @@ $("#delete-voucher").click(function () {
         }
     });
 });
+let isDetailOrder = true;
+
+function detailOrder(id) {
+    if (!isDetailOrder) {
+        return;
+    }
+    isDetailOrder = false;
+    const url = `/admin/order/detail/${id}`;
+    $.ajax({
+        url: url,
+        type: "GET",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        dataType: "JSON",
+        success: function (response) {
+            $("#order-detail").html(response);
+            $("#order-detail").modal("show");
+        },
+        error: function (error) {
+            location.reload();
+        },
+        complete: function () {
+            isDetailOrder = true;
+        },
+    });
+}
+
+let isUpdateOrder = true;
+
+function updateOrder(id) {
+    if (!isDetailOrder) {
+        return;
+    }
+    isUpdateOrder = false;
+    const url = `/admin/order/update/`;
+    Swal.fire({
+        title: "Cảnh báo!",
+        text: "Cập nhật đơn hàng?",
+        icon: "warning",
+        showCancelButton: true,
+        revertButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    id,
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (error) {
+                    location.reload();
+                },
+                complete: function () {
+                    isUpdateOrder = true;
+                },
+            });
+        } else {
+            isUpdateOrder = true;
+        }
+    });
+}
+
+function cancelOrder(id) {
+    if (!isDetailOrder) {
+        return;
+    }
+    isUpdateOrder = false;
+    const url = `/admin/order/cancel/`;
+    Swal.fire({
+        title: "Cảnh báo!",
+        text: "Hủy đơn hàng?",
+        icon: "warning",
+        showCancelButton: true,
+        revertButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    id,
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (error) {
+                    location.reload();
+                },
+                complete: function () {
+                    isUpdateOrder = true;
+                },
+            });
+        } else {
+            isUpdateOrder = true;
+        }
+    });
+}
