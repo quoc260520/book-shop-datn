@@ -72,5 +72,5 @@ Route::group(['namespace' => 'Frontend'], function () {
     include_route_files(__DIR__ . '/frontend/');
 });
 
-
 Route::get('export', [BookController::class, 'exportBook']);
+

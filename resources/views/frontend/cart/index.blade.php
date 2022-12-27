@@ -2,6 +2,7 @@
 @section('content')
     <div class="app__container">
         <div class="grid" style="margin-top:130px;">
+            @include('partials.message')
             <div class="grid__row row">
                 <h1 class="pt-3 pb-3">Giỏ hàng</h1>
                 @if (count($carts) ?? false)
@@ -56,7 +57,7 @@
                                             <div class="label-total-price col-2">
                                                 {{ number_format((intval($cart['price']) / 100) * (100 - intval($cart['percent'])) * intval($cart['amount'])) }}
                                                 đ</div>
-                                            <button class="label-trash text-black col-1 border-0 bg-white" onclick="deleteItemCart({{ $cart['id'] }})"><i class="fa-regular fa-trash-can"></i></button>
+                                            <div class="label-trash text-black col-1 border-0 bg-white" onclick="deleteItemCart({{ $cart['id'] }})"><i class="fa-regular fa-trash-can"></i></div>
                                         </div>
                                     </div>
                                 @endif

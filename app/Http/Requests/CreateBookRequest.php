@@ -31,7 +31,7 @@ class CreateBookRequest extends FormRequest
             'year_publish' => ['bail','nullable','date_format:Y'],
             'price' => ['bail','required', 'integer'],
             'sale' => ['bail','integer', 'between:1,100'],
-            'amount' => ['bail', 'nullable', 'string', 'min:3', 'max:500'],
+            'amount' => ['bail', 'nullable', 'string', 'max:10000'],
             'image' => ['bail', 'nullable','array','max:5'],
             'image.*' => ['bail','nullable','mimes:jpeg,jpg,png,gif','max:10000'],
             'status' => ['bail','integer', 'between:1,2'],

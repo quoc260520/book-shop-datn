@@ -12,11 +12,13 @@ use App\Models\Order;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Cart;
+use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -252,6 +254,9 @@ class CartController extends Controller
             ->where('start_date', '<=', $now)
             ->where('end_date', '>=', $now)
             ->first();
+        if (!auth()->user()) {
+            throw new HttpResponseException(response()->json(['message' => 'Bạn cần đăng nhập để sử dụng voucher'], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+        }
         if (!$voucher) {
             throw new HttpResponseException(response()->json(['message' => 'Voucher không khả dụng'], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
         }
@@ -268,12 +273,17 @@ class CartController extends Controller
     public function payment(Request $request)
     {
         $ids = $request->is_check;
-        if (!count($ids)) {
+        if (!count($ids ?? [])) {
             return back();
         }
 
         if ($request->code) {
-            $voucher = $this->checkVoucher($request->code);
+            try {
+                $voucher = $this->checkVoucher($request->code);
+            } catch(HttpResponseException $e) {
+                Session::flash('flash_danger', $e->getResponse()->original['message']);
+                return back();
+            }
         }
         $cartUser = $this->formatCart($ids, $request->code);
 

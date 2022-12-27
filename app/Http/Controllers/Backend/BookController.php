@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\BookExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\DeleteBookRequest;
+use App\Imports\BookImport;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use GuzzleHttp\Client;
 
 class BookController extends Controller
 {
@@ -151,7 +156,7 @@ class BookController extends Controller
             }
         }
         if ($request->hasFile('images')) {
-            $imageUpdate = $this->uploadMultiImage($request->images,$imageUpdate);
+            $imageUpdate = $this->uploadMultiImage($request->images, $imageUpdate);
         }
 
         try {
@@ -193,20 +198,39 @@ class BookController extends Controller
         return $arrayIdImages;
     }
 
-    public function getBookById(Request $request, $id) {
+    public function getBookById(Request $request, $id)
+    {
         $book = Book::with('author', 'category', 'publisher')->find($id);
-        $view = view('backend.book.includes._modal_detail')->withBook($book)->toHtml();
+        $view = view('backend.book.includes._modal_detail')
+            ->withBook($book)
+            ->toHtml();
         return response()->json([
             'data' => $view,
-        ]); 
+        ]);
+    }
+    public function exportBook()
+    {
+        $books = Book::query()
+            ->join('categorys', 'categorys.id', '=', 'books.category_id')
+            ->join('publishers', 'publishers.id', '=', 'books.publisher_id')
+            ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->select('books.id', 'book_name', 'authors.name as author_name', 'categorys.category_name', 'publishers.publisher_name')
+            ->get();
+        Excel::store(new BookExport($books->toArray()), 'recomment/recomment.xlsx', 'local');
+        return $this->uploadFileRecomment();
     }
 
-    public function exportBook() {
-        $book= Book::with('author', 'category:category_name', 'publisher')->get();
-        return (new InvoicesExport)->download('books.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-      ]);
-        return $book->toArray(); 
+    public function importBook(Request $request)
+    {
+        Excel::import(new BookImport(), $request->file('file'));
+        return 'oke';
+    }
 
+    public function uploadFileRecomment()
+    {
+        $response = Http::attach(
+            'file', file_get_contents(storage_path('/app/recomment/recomment.xlsx')), 'recomment.xlsx'
+        )->post(env('URL_UPLOAD_DATA_RECOMMENT'));
+        return json_decode($response->getBody()->getContents());
     }
 }

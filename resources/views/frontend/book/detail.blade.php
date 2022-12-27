@@ -166,57 +166,35 @@
             </div>
         </div>
 
-        <div class="content-book cart bg-white rounded mt-4 mb-5 p-5">
+        <div class="content-book cart bg-white rounded mt-4 mb-5 p-5 {{ count($bookRecomments) ? '' : 'd-none' }}">
             <div class="d-flex flex-row align-items-center header-coupon">
                 <div class="ml-2 label-coupon">Có thể bạn sẽ thích </div>
             </div>
             <div class="d-flex flex-row align-items-start suggest-books row">
+                @foreach ($bookRecomments as $key => $bookRecomment)
                 <div class="suggest-book col-3 d-flex flex-column">
-                    <div class="img-suggest d-flex flex-row justify-content-center">
+                    <a href="{{ route('book.detail', $bookRecomment->id) }}" class="img-suggest d-flex flex-row justify-content-center">
                         <div class="bg-secondary">
                             <img alt="" class="img-book" class="ml-5 col-8"
-                                src="{{ get_image_book($book->image[0]) }}">
+                                src="{{ get_image_book($bookRecomment->image[0]) }}">
                         </div>
-
-                        @if ($book->is_sale)
-                            <div class="percent-suggest ms-3">{{ $book->percent }} %</div>
+                        @if ($bookRecomment->is_sale)
+                            <div class="percent-suggest ms-3">{{ $bookRecomment->percent }} %</div>
                         @endif
-                    </div>
+                    </a>
                     <div class="name-suggest">
-                        {{ $book->book_name }}
+                        {{ $bookRecomment->book_name }}
                     </div>
                     <div class="price-suggest">
-                        {{ number_format($book->price) }} đ
+                        {{ number_format($bookRecomment->price) }} đ
                     </div>
-                    @if ($book->is_sale)
+                    @if ($bookRecomment->is_sale)
                         <div class="price-sale">
-                            {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}
+                            {{ number_format((intval($bookRecomment->price) / 100) * (100 - intval($bookRecomment->percent))) }}
                         </div>
                     @endif
                 </div>
-                <div class="suggest-book col-3 d-flex flex-column">
-                    <div class="img-suggest d-flex flex-row justify-content-center">
-                        <div class="bg-secondary">
-                            <img alt="" class="img-book" class="ml-5 col-8"
-                                src="{{ get_image_book($book->image[0]) }}">
-                        </div>
-
-                        @if ($book->is_sale)
-                            <div class="percent-suggest ms-3">{{ $book->percent }} %</div>
-                        @endif
-                    </div>
-                    <div class="name-suggest">
-                        {{ $book->book_name }}
-                    </div>
-                    <div class="price-suggest">
-                        {{ number_format($book->price) }} đ
-                    </div>
-                    @if ($book->is_sale)
-                        <div class="price-sale">
-                            {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}
-                        </div>
-                    @endif
-                </div>
+                @endforeach
             </div>
         </div>
 

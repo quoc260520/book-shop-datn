@@ -10,6 +10,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
+use GuzzleHttp\Client;
+
 
 class BookController extends Controller
 {
@@ -44,11 +46,30 @@ class BookController extends Controller
 
         $avgRate = $totalRate ?? false ? round($totalRate / count($book->reviews), 1) : 0;
 
+        $bookRecommentIds = $this->getRecomment($book->book_name);
+        $bookRecomments = Book::whereIn('id', $bookRecommentIds)->with('author', 'category', 'publisher', 'reviews.user')->get();
+
         return view('frontend.book.detail')
             ->withBook($book)
             ->withVouchers($vouchers)
             ->withAvgRate($avgRate)
-            ->withArrayRate($arrayRate);
+            ->withArrayRate($arrayRate)
+            ->withBookRecomments($bookRecomments);
+    }
+
+    public function getRecomment($bookName = "") {
+        $client = new Client();
+        try {
+            $res = $client->request('POST', env('URL_RECOMMENT'), [
+                'form_params' => [
+                    'bookname' => $bookName,
+                ]
+            ]);
+            return json_decode($res->getBody()->getContents());
+        } catch (\Exception $exception) {
+            return [];
+        }
+        
     }
 
     public function checkAmount(Request $request, $id)
