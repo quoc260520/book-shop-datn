@@ -38,4 +38,36 @@ class CreateBookRequest extends FormRequest
             'describe_book' => ['bail', 'nullable','string'],
         ];
     }
+    public function attributes()
+    {
+        return [
+            'book_name' => 'Tên sách',
+            'category' => 'Danh mục',
+            'author' => 'Tác giả',
+            'publisher' => 'Nhà xuất bản',
+            'year_publish' => 'Năm xuất bản',
+            'price' => 'Giá tiền',
+            'sale' => 'Giảm giá',
+            'amount' => 'Số lượng',
+            'image' => 'Hình ảnh',
+            'image.*' => 'Hình ảnh',
+            'status' => 'Trang thái',
+            'describe_book' => 'Mô tả'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => ':attribute không được để trống',
+            'string' => ':attribute phải là chuỗi',
+            'min' => ':attribute phải lớn hơn :min ký tự',
+            'max' => ':attribute phải bé hơn :max ký tự',
+            'date' => ':attribute phải là ngày',
+            'integer' => ':attribute phải là số',
+            'date_format' => ':attribute phải là dạng :format',
+            'between' => ':attribute phải nằm trong khoảng :min và :max',
+            'array' => ':attribute phải là một mảng',
+            'mimes' => ':attribute là một tệp loại: :values',
+        ];
+    }
 }

@@ -25,4 +25,29 @@ class UpdateAccountRequest extends BaseRequest
             'birthday' => ['bail', 'nullable','date']
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'first_name' => 'Họ',
+            'last_name' => 'Tên',
+            'email' => 'Email',
+            'phone' => 'Số điện thoại',
+            'password' => 'Mật khẩu',
+            'address' => 'Địa chỉ',
+            'birthday' => 'Ngày sinh'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => ':attribute không được để trống',
+            'string' => ':attribute phải là chuỗi',
+            'email' => 'Phải là định dạng email',
+            'min' => ':attribute phải lớn hơn :min ký tự',
+            'max' => ':attribute phải bé hơn :max ký tự',
+            'unique' => ':attribute đã tồn tại',
+            'date' => ':attribute phải là ngày'
+        ];
+    }
 }

@@ -5,7 +5,10 @@
             @include('partials.message')
             <div class="grid__row row">
                 <h1 class="pt-3 pb-3">Giỏ hàng</h1>
-                @if (count($carts) ?? false)
+                @php
+                    $isReadlyCart = array_key_exists('total', $carts) && (count($carts) - 1) ;
+                @endphp
+                @if ( $isReadlyCart ?? false)
                 <form action="{{ route('payment') }}" method="post" id="form-cart">
                     @csrf
                     <div class="grid__column-12 vh-100 d-flex flex-sm-row">
@@ -81,6 +84,10 @@
                                 <div class="pt-3 pb-3 col-12 d-flex flex-row justify-content-between">
                                     <div class="label-money">Thành tiền</div>
                                     <div class="label-money"><span id="total-money">0</span>đ</div>
+                                </div>
+                                <div class="pt-3 pb-3 col-12 d-flex flex-row justify-content-between">
+                                    <div class="label-money">Mã giảm giá</div>
+                                    <div class="label-money"><span id="voucher"> - {{ $voucher ?? 0 }}</span>đ</div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-center">
                                     <div class="border-bottom col-11"></div>

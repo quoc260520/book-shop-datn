@@ -22,7 +22,15 @@ class DeleteVoucherRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'delete_voucher.*' => 'delete voucher',
+            'delete_voucher.*' => 'Mã giảm giá',
+            'delete_voucher' => 'Mã giảm giá'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một mã giảm giá',
+            'exists' => 'Mã giảm giá không tồn tại'
         ];
     }
 }

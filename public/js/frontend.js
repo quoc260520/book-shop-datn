@@ -13,7 +13,12 @@ $(window).on("beforeunload", function () {
 $(window).on("unload", function () {
     $("body").removeClass("loading");
 });
-
+window.addEventListener("pageshow", function (event) {
+    var perfEntries = performance.getEntriesByType("navigation");
+    if (perfEntries[0].type === "back_forward") {
+        location.reload();
+    }
+});
 loadImage();
 function loadImage() {
     $("#avatar-input").change(function (e) {

@@ -13,4 +13,21 @@ class UpdateSliderRequest extends CreateSlider
             'image' => ['bail', 'nullable', 'mimes:jpeg,jpg,png|max:10000']
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'link_update' => 'Link',
+            'image'=> 'Hình ảnh',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => ':attribute không được để trống',
+            'string' => ':attribute phải là chuỗi',
+            'image.max' => 'Dung lượng :attribute phải bé hơn :max',
+            'mimes' => ':attribute là một tệp loại: :values',
+        ];
+    }
 }

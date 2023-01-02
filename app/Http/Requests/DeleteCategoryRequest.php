@@ -22,7 +22,14 @@ class DeleteCategoryRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'delete_category.*' => 'category',
+            'delete_category.*' => 'Danh mục',
+            'delete_category' => 'Danh mục',
+        ];
+    }
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một danh mục',
+            'exists' => 'Danh mục không tồn tại'
         ];
     }
 }

@@ -18,4 +18,19 @@ class DeleteSlider extends BaseRequest
             'delete_slider.*' => 'bail|required|string'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'delete_slider.*' => 'Slider',
+            'delete_slider' => 'Slider',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một slider',
+            'exists' => 'Slider không tồn tại'
+        ];
+    }
 }

@@ -104,12 +104,13 @@ function checkPayment() {
         },
         dataType: "JSON",
         success: function (response) {
+            console.log(response);
             $("#total-money").html(
                 new Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
                 })
-                    .format(response.total)
+                    .format(response.intoMoney)
                     .replace("₫", "")
             );
             $("#money").html(
@@ -119,6 +120,15 @@ function checkPayment() {
                 })
                     .format(response.total)
                     .replace("₫", "")
+            );
+            $("#voucher").html(
+                "- " +
+                    new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                    })
+                        .format(response.voucher)
+                        .replace("₫", "")
             );
 
             $(".btn-apply-payment").prop("disabled", isDisabled ? false : true);

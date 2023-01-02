@@ -23,7 +23,6 @@
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
                             Quản lý tài khoản
-                            <span class="badge badge-info right">6</span>
                         </p>
                     </a>
                 </li>
@@ -45,7 +44,7 @@
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a class="nav-link" {{ Route::is('admin.slider.list') ? 'active' : '' }}
+                    <a class="nav-link {{ Route::is('admin.slider.*') ? 'active' : '' }}"
                     href="{{ route('admin.slider.list') }}">
                         <i class="nav-icon fa-solid fa-sliders"></i>
                         <p>

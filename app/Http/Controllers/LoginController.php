@@ -49,15 +49,17 @@ class LoginController extends Controller
         ]);
     }
 
-    public function authenticated(Request $request, $user)
+    public function authenticated(Request $request,User $user)
     {
-        if (!$user->isActive()){
-            throw new GeneralException(
-                __(
-                    'exceptions.frontend.auth.confirmation.resend',
-                    ['url' => route('frontend.auth.account.confirm.resend', ($user->{$user->getUuidName()}))]
-                )
-            );
+        if ($user->active != User::ACTIVE){
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+    
+            $request->session()->regenerateToken();
+            throw ValidationException::withMessages([
+                $this->username() => 'Tài khoản đã bị khóa, vui lòng liên hệ quản trị viên để biết thêm chi tiết',
+            ]);
             return back();
         }
 

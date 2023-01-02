@@ -13,4 +13,19 @@ class CreateCategoryRequest extends BaseRequest
             'category_parent' => 'required|integer',
         ];
     }
+    public function attributes()
+    {
+        return [
+            'category_name' => 'Tên danh mục', 
+            'category_parent' => 'Danh mục cha',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => ':attribute không được để trống',
+            'string' => ':attribute phải là chuỗi',
+            'max' => ':attribute phải lớn hơn :max ký tự',
+        ];
+    }
 }

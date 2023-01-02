@@ -23,7 +23,15 @@ class DeletePublisherRequest extends BaseRequest
     public function attributes()
     {
         return [
-            'delete_publisher.*' => 'Publisher',
+            'delete_publisher.*' => 'Nhà xuất bản',
+            'delete_publisher' => 'Nhà xuất bản',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một nhà xuất bản',
+            'exists' => 'Nhà xuất bản không tồn tại'
         ];
     }
 }

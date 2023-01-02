@@ -21,7 +21,15 @@ class DeleteAccountRequest extends BaseRequest
 
     public function attributes() {
         return [
-            'delete_account.*' => 'delete account',
+            'delete_account.*' => 'Tài khoản',
+            'delete_account' => 'Tài khoản'
         ];
     }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một tài khoản',
+        ];
+    }
+
 }

@@ -215,7 +215,10 @@ class CartController extends Controller
                         $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($item['qty']);
                     }
                 }
+                $cartUser['intoMoney'] = $totalCart;
                 $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
+                $cartUser['voucher'] = $totalCart - $cartUser['total'];
+
             }
         }
 
@@ -235,7 +238,9 @@ class CartController extends Controller
                     $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($cartDetail->amount);
                 }
             }
+            $cartUser['intoMoney'] = $totalCart;
             $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
+            $cartUser['voucher'] = $totalCart - $cartUser['total'];
         }
 
         return $cartUser;
@@ -261,10 +266,12 @@ class CartController extends Controller
             throw new HttpResponseException(response()->json(['message' => 'Voucher không khả dụng'], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
         }
         $totalVoucherUsed = Order::where('voucher_id', $voucher->id)
-            ->where('user_id', auth()->user() ? auth()->user()->id : null)
             ->where('status', '!=', Order::STATUS_ERROR)
-            ->count();
-        if ($voucher->amount < $totalVoucherUsed || $totalVoucherUsed >= $voucher->amount) {
+            ->get();
+        if (count($totalVoucherUsed->where('user_id', auth()->user()->id))) {
+            throw new HttpResponseException(response()->json(['message' => 'Bạn đã sử dụng voucher này.'], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+        }
+        if (count($totalVoucherUsed) >= $voucher->amount) {
             throw new HttpResponseException(response()->json(['message' => 'Voucher đã hết'], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
         }
         return $voucher;
@@ -285,10 +292,11 @@ class CartController extends Controller
                 return back();
             }
         }
-        $cartUser = $this->formatCart($ids, $request->code);
+        [$cartUser, $voucher] = $this->formatCart($ids, $request->code);
 
         return view('frontend.payment')
             ->withCarts($cartUser)
+            ->withVoucherApp($voucher)
             ->withCode($request->code);
     }
 
@@ -324,6 +332,7 @@ class CartController extends Controller
                     }
                 }
                 $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
+                $voucherApp = $totalCart - $cartUser['total'];
             }
         }
 
@@ -350,8 +359,9 @@ class CartController extends Controller
                 }
             }
             $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
+            $voucherApp = $totalCart - $cartUser['total'];
         }
-        return $cartUser;
+        return [$cartUser, $voucherApp];
     }
 
     public function applyPayment(ApplyPaymentRequest $request)
@@ -365,7 +375,7 @@ class CartController extends Controller
         if ($request->code) {
             $voucher = $this->checkVoucher($request->code);
         }
-        $cartUser = $this->formatCart($ids, $request->code);
+        [$cartUser, $voucherApply] = $this->formatCart($ids, $request->code);
 
         try {
             DB::beginTransaction();

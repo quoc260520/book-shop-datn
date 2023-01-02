@@ -4,9 +4,16 @@ $(".coupon-wrap").slick({
 });
 $(document).ready(function () {
     $(".btn-add-to-cart").click(function () {
-        $(this).prop("disabled", true);
-        vm = this;
-        let url = $(this).data("href");
+        addCart(this, true);
+    });
+    $(".btn-shopping-now").click(function () {
+        addCart(this, false);
+    });
+
+    function addCart(el, reload = true) {
+        $(el).prop("disabled", true);
+        vm = el;
+        let url = $(el).data("href");
         let data = {
             amount: $("#counter").val(),
         };
@@ -19,7 +26,11 @@ $(document).ready(function () {
             data: data,
             dataType: "JSON",
             success: function (response) {
-                location.reload();
+                if (reload) {
+                    location.reload();
+                } else {
+                    window.location.href = "/cart";
+                }
             },
             error: function (error) {
                 let message =
@@ -38,7 +49,7 @@ $(document).ready(function () {
                 $(vm).prop("disabled", false);
             },
         });
-    });
+    }
 
     $(".btn-amount").on("click", function (e) {
         var button = $(this);

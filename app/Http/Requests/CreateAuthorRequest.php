@@ -19,4 +19,22 @@ class CreateAuthorRequest extends BaseRequest
             'address' => 'bail|nullable|string|max:255|min:3',
         ];
     }
+    public function attributes()
+    {
+        return [
+            'author_name' => 'Tên tác giả',
+            'data_of_birth' => 'Ngày sinh',
+            'address' => 'Địa chỉ',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => ':attribute không được để trống',
+            'string' => ':attribute phải là chuỗi',
+            'min' => ':attribute phải lớn hơn :min ký tự',
+            'max' => ':attribute phải bé hơn :max ký tự',
+            'date' => ':attribute phải là ngày'
+        ];
+    }
 }

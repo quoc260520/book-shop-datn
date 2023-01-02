@@ -12,9 +12,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $addDay = Carbon::now()->addDays(15);
-        $subDay = Carbon::now()->subDays(15);
-        $orderStatistical30day = Order::whereDate('created_at', '<=', $addDay->format('Y-m-d'))
+        $now  = Carbon::now();
+        $subDay = $now->copy()->subDays(30);
+        $orderStatistical30day = Order::whereDate('created_at', '<=', $now->format('Y-m-d'))
             ->whereDate('created_at', '>=', $subDay->format('Y-m-d'))
             ->get();
         $arrayOrderStatus = [
@@ -24,7 +24,7 @@ class DashboardController extends Controller
             'error' => $orderStatistical30day->where('status', Order::STATUS_ERROR)->count(),
         ];
         $orderByDay = [];
-        for ($i = 15; $i > 0; $i--) {
+        for ($i = 30; $i >= 0; $i--) {
             $orderByDay[
                 Carbon::now()
                     ->subDays($i)
@@ -42,28 +42,6 @@ class DashboardController extends Controller
                     '<=',
                     Carbon::now()
                         ->subDays($i)
-                        ->endOfDay(),
-                )
-                ->count();
-        }
-        for ($k = 0; $k <= 15; $k++) {
-            $orderByDay[
-                Carbon::now()
-                    ->addDays($k)
-                    ->format('Y-m-d')
-            ] = $orderStatistical30day
-                ->where(
-                    'created_at',
-                    '>=',
-                    Carbon::now()
-                        ->addDays($k)
-                        ->startOfDay(),
-                )
-                ->where(
-                    'created_at',
-                    '<=',
-                    Carbon::now()
-                        ->addDays($k)
                         ->endOfDay(),
                 )
                 ->count();

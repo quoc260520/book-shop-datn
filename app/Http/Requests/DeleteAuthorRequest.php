@@ -18,4 +18,17 @@ class DeleteAuthorRequest extends BaseRequest
             'delete_author.*' => 'bail|required|integer'
         ];
     }
+
+    public function attributes() {
+        return [
+            'delete_author.*' => 'Tác giả',
+            'delete_author' => 'Tác giả'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một tác giả',
+        ];
+    }
 }

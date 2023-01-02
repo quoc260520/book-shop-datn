@@ -104,6 +104,18 @@
                                 @endforeach
                                 <div class="d-flex p-5 flex-row justify-content-between align-items-center item-cart">
                                     <div class="col-6 text-uppercase fs-3 text">
+                                        Mã giảm giá
+                                    </div>
+
+                                    <div class='text-uppercase'>
+                                        <div class="label-total-price fs-3 text ml-3">
+                                            {{ number_format($voucherApp) }}
+                                            <span class="text-lowercase">đ</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex p-5 flex-row justify-content-between align-items-center item-cart">
+                                    <div class="col-6 text-uppercase fs-3 text">
                                         Tổng tiền
                                     </div>
 

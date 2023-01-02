@@ -21,8 +21,14 @@ class DeleteBookRequest extends BaseRequest
 
     public function attributes() {
         return [
-            'delete_book' => 'book ',
-            'delete_book.*' => 'book',
+            'delete_book' => 'Sách ',
+            'delete_book.*' => 'Sách',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required' => 'Phải chọn ít nhất một sách',
         ];
     }
 }

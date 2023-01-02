@@ -7,7 +7,7 @@
 
         </div>
         <div class="content-book cart bg-white rounded">
-            <input type="hidden" name="book_id" value="{{ $book->id }}">
+            <input name="book_id" type="hidden" value="{{ $book->id }}">
             <div class="content-info">
                 <div class="content-info col-12 d-flex flex-sm-row flex-column">
                     <div class="img-wrapper col-6 d-flex align-items-center justify-content-around">
@@ -91,7 +91,8 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <div class="ml-2">Thêm vào giỏ hàng</div>
                             </button>
-                            <button {{ $book->amount == 0 ? 'disabled' : '' }} class="btn-shopping-now" type="button">
+                            <button {{ $book->amount == 0 ? 'disabled' : '' }} class="btn-shopping-now"
+                                data-href="{{ route('add-cart', $book->id) }}" type="button">
                                 Mua ngay
                             </button>
                         </div>
@@ -172,28 +173,29 @@
             </div>
             <div class="d-flex flex-row align-items-start suggest-books row">
                 @foreach ($bookRecomments as $key => $bookRecomment)
-                <div class="suggest-book col-3 d-flex flex-column">
-                    <a href="{{ route('book.detail', $bookRecomment->id) }}" class="img-suggest d-flex flex-row justify-content-center">
-                        <div class="bg-secondary">
-                            <img alt="" class="img-book" class="ml-5 col-8"
-                                src="{{ get_image_book($bookRecomment->image[0]) }}">
+                    <div class="suggest-book col-3 d-flex flex-column">
+                        <a class="img-suggest d-flex flex-row justify-content-center"
+                            href="{{ route('book.detail', $bookRecomment->id) }}">
+                            <div class="bg-secondary">
+                                <img alt="" class="img-book" class="ml-5 col-8"
+                                    src="{{ get_image_book($bookRecomment->image[0]) }}">
+                            </div>
+                            @if ($bookRecomment->is_sale)
+                                <div class="percent-suggest ms-3">{{ $bookRecomment->percent }} %</div>
+                            @endif
+                        </a>
+                        <div class="name-suggest">
+                            {{ $bookRecomment->book_name }}
+                        </div>
+                        <div class="price-suggest">
+                            {{ number_format($bookRecomment->price) }} đ
                         </div>
                         @if ($bookRecomment->is_sale)
-                            <div class="percent-suggest ms-3">{{ $bookRecomment->percent }} %</div>
+                            <div class="price-sale">
+                                {{ number_format((intval($bookRecomment->price) / 100) * (100 - intval($bookRecomment->percent))) }}
+                            </div>
                         @endif
-                    </a>
-                    <div class="name-suggest">
-                        {{ $bookRecomment->book_name }}
                     </div>
-                    <div class="price-suggest">
-                        {{ number_format($bookRecomment->price) }} đ
-                    </div>
-                    @if ($bookRecomment->is_sale)
-                        <div class="price-sale">
-                            {{ number_format((intval($bookRecomment->price) / 100) * (100 - intval($bookRecomment->percent))) }}
-                        </div>
-                    @endif
-                </div>
                 @endforeach
             </div>
         </div>
