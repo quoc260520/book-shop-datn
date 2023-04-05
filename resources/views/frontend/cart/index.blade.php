@@ -36,7 +36,7 @@
                                                     <div class="book-name text-danger {{ isset($cart['delete']) ? 'd-flex' : 'd-none' }}">Số lượng vượt quá giới hạn</div>
                                                     <div class="price">
                                                         <span
-                                                            class="cost">{{ number_format((intval($cart['price']) / 100) * (100 - intval($cart['percent']))) }}
+                                                            class="cost">{{ number_format((intval($cart['price']) / 100) * (100 - intval($cart['is_sale'] ? $cart['percent'] : 0))) }}
                                                             đ</span>
                                                         @if ($cart['is_sale'])
                                                             <span class="price-sale">
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                             <div class="label-total-price col-2">
-                                                {{ number_format((intval($cart['price']) / 100) * (100 - intval($cart['percent'])) * intval($cart['amount'])) }}
+                                                {{ number_format((intval($cart['price']) / 100) * (100 - intval($cart['is_sale'] ? $cart['percent'] : 0)) * intval($cart['amount'])) }}
                                                 đ</div>
                                             <div class="label-trash text-black col-1 border-0 bg-white" onclick="deleteItemCart({{ $cart['id'] }})"><i class="fa-regular fa-trash-can"></i></div>
                                         </div>
@@ -104,7 +104,7 @@
                                         </button>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>

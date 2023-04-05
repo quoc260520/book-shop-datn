@@ -61,11 +61,11 @@
                         </div>
                         <div class="price-wrap mt-3 d-flex flex-row align-items-center">
                             <div class="price">
-                                {{ number_format($book->price) }} đ
+                                {{ number_format((intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0))) }}đ
                             </div>
                             @if ($book->is_sale)
                                 <div class="price-sale">
-                                    {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}
+                                    {{ number_format($book->price) }}
                                 </div>
                                 <div class="percent ms-3"> -{{ $book->percent }} %</div>
                             @endif

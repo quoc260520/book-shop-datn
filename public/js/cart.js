@@ -110,7 +110,7 @@ function checkPayment() {
                     style: "currency",
                     currency: "VND",
                 })
-                    .format(response.intoMoney)
+                    .format(response.intoMoney ? response.intoMoney : 0)
                     .replace("₫", "")
             );
             $("#money").html(
@@ -127,7 +127,7 @@ function checkPayment() {
                         style: "currency",
                         currency: "VND",
                     })
-                        .format(response.voucher)
+                        .format(response.voucher ? response.voucher : 0)
                         .replace("₫", "")
             );
 

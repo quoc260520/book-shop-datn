@@ -84,7 +84,7 @@ if (!function_exists('get_count_cart')) {
                 })
                 ->first();
             $totalItem = 0;
-            foreach ($cart->CartDetails as $cartDetail) {
+            foreach ($cart->CartDetails ?? [] as $cartDetail) {
                 $totalItem += intval($cartDetail->amount);
             }
             return $totalItem;

@@ -84,7 +84,7 @@
                                             <div class="d-flex flex-row">
                                                 <div class="price d-flex flex-column align-items-start mr-5">
                                                     <div class="cost ml-3">
-                                                        {{ number_format((intval($cart['book']->price) / 100) * (100 - intval($cart['book']->percent))) }}
+                                                        {{ number_format((intval($cart['book']->price) / 100) * (100 - intval($cart['book']->is_sale ? $cart['book']->percent : 0))) }}
                                                         đ</div>
                                                     @if ($cart['book']->is_sale)
                                                         <div class="price-sale ml-3">
@@ -96,7 +96,7 @@
                                                     <span class="cost"> {{ intval($cart['qty']) }}</span>
                                                 </div>
                                                 <div class="label-total-price">
-                                                    {{ number_format((intval($cart['book']->price) / 100) * (100 - intval($cart['book']->percent)) * intval($cart['qty'])) }}
+                                                    {{ number_format((intval($cart['book']->price) / 100) * (100 - intval($cart['book']->is_sale ? $cart['book']->percent : 0)) * intval($cart['qty'])) }}
                                                     đ</div>
                                             </div>
                                         </div>

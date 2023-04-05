@@ -45,7 +45,7 @@
                                         </a>
                                         <div class="home-product-item__price">
                                             <span class="home-product-item__price-current">
-                                                {{ number_format((intval($bookNew->price) / 100) * (100 - intval($bookNew->percent))) }}</span>
+                                                {{ number_format((intval($bookNew->price) / 100) * (100 - intval($bookNew->is_sale ? $bookNew->percent : 0))) }}</span>
                                             @if ($bookNew->is_sale)
                                                 <div class="home-product-item__price-old">
                                                     {{ number_format($bookNew->price) }}
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="home-product-item__sale-off">
                                             <span
-                                                class="home-product-item__sale-off-percent">{{ $bookNew->percent }}%</span>
+                                                class="home-product-item__sale-off-percent">{{$bookNew->is_sale ? $bookNew->percent : 0 }}%</span>
                                             <span class="home-product-item__sale-off-lable">Giảm</span>
                                         </div>
                                     </div>
@@ -209,7 +209,7 @@
                                         </a>
                                         <div class="home-product-item__price">
                                             <span class="home-product-item__price-current">
-                                                {{ number_format((intval($bookBestSell->price) / 100) * (100 - intval($bookBestSell->percent))) }}</span>
+                                                {{ number_format((intval($bookBestSell->price) / 100) * (100 - intval($bookBestSell->is_sale ? $bookBestSell->percent : 0))) }}</span>
                                             @if ($bookBestSell->is_sale)
                                                 <div class="home-product-item__price-old">
                                                     {{ number_format($bookBestSell->price) }}
@@ -258,7 +258,7 @@
                                         </div>
                                         <div class="home-product-item__sale-off">
                                             <span
-                                                class="home-product-item__sale-off-percent">{{ $bookBestSell->percent }}%</span>
+                                                class="home-product-item__sale-off-percent">{{ $bookBestSell->is_sale ? $bookBestSell->percent : 0 }}%</span>
                                             <span class="home-product-item__sale-off-lable">Giảm</span>
                                         </div>
                                     </div>
@@ -288,7 +288,7 @@
                                         </a>
                                         <div class="home-product-item__price">
                                             <span class="home-product-item__price-current">
-                                                {{ number_format((intval($book->price) / 100) * (100 - intval($book->percent))) }}</span>
+                                                {{ number_format((intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0))) }}</span>
                                             @if ($book->is_sale)
                                                 <div class="home-product-item__price-old">
                                                     {{ number_format($book->price) }}
@@ -336,7 +336,7 @@
                                             <span>Yêu thích</span>
                                         </div>
                                         <div class="home-product-item__sale-off">
-                                            <span class="home-product-item__sale-off-percent">{{ $book->percent }}%</span>
+                                            <span class="home-product-item__sale-off-percent">{{ $book->is_sale ? $book->percent : 0}}%</span>
                                             <span class="home-product-item__sale-off-lable">Giảm</span>
                                         </div>
                                     </div>

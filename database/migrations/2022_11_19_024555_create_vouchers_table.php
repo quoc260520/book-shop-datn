@@ -18,8 +18,8 @@ class CreateVouchersTable extends Migration
             $table->char('code',50);
             $table->integer('amount');
             $table->tinyInteger('percent');
-            $table->timestamps('start_date');
-            $table->timestamps('end_date');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $now  = Carbon::now();
+        $now = Carbon::now();
         $subDay = $now->copy()->subDays(30);
         $orderStatistical30day = Order::whereDate('created_at', '<=', $now->format('Y-m-d'))
             ->whereDate('created_at', '>=', $subDay->format('Y-m-d'))
@@ -58,11 +58,13 @@ class DashboardController extends Controller
         $revenue = Order::whereYear('created_at', Carbon::now()->format('Y-m-d'));
         $revenueMonth = [];
         for ($m = 1; $m <= 12; $m++) {
-            $revenueMonth[$m] = $revenue->clone()
+            $revenueMonth[$m] = $revenue
+                ->clone()
                 ->whereMonth('created_at', intval($m))
                 ->sum('total_money');
         }
-        $revenueDifference = ($revenueMonth[Carbon::now()->month] - $revenueMonth[Carbon::now()->month - 1]) / $revenueMonth[Carbon::now()->month - 1] * 100;
+
+        $revenueDifference = ($revenueMonth[Carbon::now()->month - 1] != 0) ? (($revenueMonth[Carbon::now()->month] - $revenueMonth[Carbon::now()->month - 1]) / $revenueMonth[Carbon::now()->month - 1]) * 100 : 0;
 
         return view('backend.statistical')
             ->withOrderStatistical30day(json_encode($orderStatistical30day))
@@ -71,7 +73,6 @@ class DashboardController extends Controller
             ->withRevenueMonth(json_encode($revenueMonth))
             ->withCountOrderToday($countOrderToday)
             ->withCountUser($countUser)
-            ->withRevenueDifference(round($revenueDifference,2));
-            ;
+            ->withRevenueDifference(round($revenueDifference, 2));
     }
 }

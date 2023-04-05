@@ -50,7 +50,7 @@ class CartController extends Controller
                         $itemCart['delete'] = true;
                     }
                     array_push($cartUser, $itemCart);
-                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($item['qty']);
+                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($item['qty']);
                 }
                 $cartUser['total'] = $totalCart;
             }
@@ -78,7 +78,7 @@ class CartController extends Controller
                     $itemCart['delete'] = true;
                 }
                 array_push($cartUser, $itemCart);
-                $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($cartDetail->amount);
+                $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($cartDetail->amount);
             }
             $cartUser['total'] = $totalCart;
         }
@@ -212,7 +212,7 @@ class CartController extends Controller
                         if (!$book || $book->deleted_at || $book->amount == 0 || intval($book->amount) < intval($item['qty'])) {
                             $itemCart['delete'] = true;
                         }
-                        $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($item['qty']);
+                        $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($item['qty']);
                     }
                 }
                 $cartUser['intoMoney'] = $totalCart;
@@ -235,7 +235,7 @@ class CartController extends Controller
                     if (!$book || $book->deleted_at || $book->amount == 0 || intval($book->amount) < intval($cartDetail->amount)) {
                         $itemCart['delete'] = true;
                     }
-                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($cartDetail->amount);
+                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($cartDetail->amount);
                 }
             }
             $cartUser['intoMoney'] = $totalCart;
@@ -328,7 +328,7 @@ class CartController extends Controller
                             ];
                             array_push($cartUser, $itemCart);
                         }
-                        $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($item['qty']);
+                        $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($item['qty']);
                     }
                 }
                 $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
@@ -355,7 +355,7 @@ class CartController extends Controller
                         ];
                         array_push($cartUser, $itemCart);
                     }
-                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->percent)) * intval($cartDetail->amount);
+                    $totalCart += (intval($book->price) / 100) * (100 - intval($book->is_sale ? $book->percent : 0)) * intval($cartDetail->amount);
                 }
             }
             $cartUser['total'] = ($totalCart / 100) * (100 - intval($voucher->percent ?? 0));
