@@ -1,0 +1,79 @@
+version: '3.8'
+name: book_shop
+
+networks:
+  book_shop_networks:
+    driver: bridge
+    name: book_shop_networks
+
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    build:
+      context: ./
+      dockerfile: ./nginx/Dockerfile
+    networks:
+      - book_shop_networks
+    restart: always
+    ports:
+      - "8080:80"
+      - "444:443"
+    volumes:
+      - .:/var/www/html:delegated
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - laravel
+    links:
+      - laravel
+
+  laravel:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/var/www/html:delegated
+    depends_on:
+      - mysql
+    networks:
+      - book_shop_networks
+
+  mysql:
+    image: mysql:8.0
+    container_name: ${DB_HOST}
+    networks:
+      - book_shop_networks
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_HOST=${DB_HOST}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./docker/mysql:/docker-entrypoint-initdb.d:delegated
+      - ./.docker/mysql-data:/var/lib/mysql:delegated
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    networks:
+      - book_shop_networks
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=${DB_HOST}
+      - PMA_USER=${DB_USERNAME}
+      - PMA_PASSWORD=${DB_PASSWORD}
+    ports:
+    - "8081:80"
+
+
+
+
+
